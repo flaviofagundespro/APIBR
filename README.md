@@ -1,11 +1,16 @@
-# APIBR - Professional Web Scraping API
+# 🚀 APIBR - API de Scraping Profissional
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
+[![Express.js](https://img.shields.io/badge/Express.js-404D59?style=flat&logo=express)](https://expressjs.com/)
 [![Redis](https://img.shields.io/badge/Redis-Required-red.svg)](https://redis.io/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://docker.com/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/flaviofagundespro/APIBR.svg)](https://github.com/flaviofagundespro/APIBR/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/flaviofagundespro/APIBR.svg)](https://github.com/flaviofagundespro/APIBR/network)
 
-A professional web scraping API built with Node.js, Puppeteer, and Redis. Features browser pool management, multiple scraping strategies, and enterprise-grade monitoring.
+> **Alternativa gratuita e poderosa ao Apify para automações de scraping**
+
+Uma API de scraping profissional construída com Node.js, Puppeteer e Redis. Oferece gerenciamento de pool de navegadores, múltiplas estratégias de scraping e monitoramento de nível empresarial.
 
 ## 🚀 Features
 
