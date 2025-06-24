@@ -1,0 +1,52 @@
+{
+  "description": "E-commerce Product Scraping Example",
+  "endpoint": "POST /api/scrape",
+  "strategy": "basic",
+  "url": "https://store.com/product/123",
+  "selectors": {
+    "title": {
+      "query": ".product-title"
+    },
+    "price": {
+      "query": ".product-price"
+    },
+    "images": {
+      "query": ".product-image",
+      "attribute": "src",
+      "multiple": true
+    },
+    "description": {
+      "query": ".product-description"
+    },
+    "availability": {
+      "query": ".stock-status"
+    },
+    "reviews": {
+      "query": ".review-item",
+      "multiple": true
+    }
+  },
+  "expected_response": {
+    "success": true,
+    "data": {
+      "title": "Product Name",
+      "price": "$99.99",
+      "images": [
+        "https://store.com/image1.jpg",
+        "https://store.com/image2.jpg"
+      ],
+      "description": "Product description...",
+      "availability": "In Stock",
+      "reviews": [
+        "Great product!",
+        "Highly recommended!"
+      ]
+    },
+    "metadata": {
+      "strategy": "basic",
+      "url": "https://store.com/product/123",
+      "timestamp": "2024-01-01T12:00:00.000Z",
+      "executionTime": 1234
+    }
+  }
+} 

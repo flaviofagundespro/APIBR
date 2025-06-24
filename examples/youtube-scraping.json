@@ -1,0 +1,41 @@
+{
+  "description": "YouTube Channel Scraping Example",
+  "endpoint": "POST /api/scrape",
+  "strategy": "javascript",
+  "url": "https://www.youtube.com/@channel",
+  "waitFor": {
+    "selector": "#content",
+    "timeout": 10000
+  },
+  "script": "{
+    channelName: document.querySelector('#channel-name')?.textContent,
+    subscribers: document.querySelector('#subscriber-count')?.textContent,
+    description: document.querySelector('#description')?.textContent,
+    videos: Array.from(document.querySelectorAll('#video-title')).slice(0, 10).map(v => ({
+      title: v.textContent?.trim(),
+      url: v.href,
+      views: v.closest('#dismissible')?.querySelector('#metadata-line')?.textContent?.trim()
+    }))
+  }",
+  "expected_response": {
+    "success": true,
+    "data": {
+      "channelName": "Channel Name",
+      "subscribers": "1M subscribers",
+      "description": "Channel description...",
+      "videos": [
+        {
+          "title": "Video Title",
+          "url": "https://www.youtube.com/watch?v=...",
+          "views": "100K views"
+        }
+      ]
+    },
+    "metadata": {
+      "strategy": "javascript",
+      "url": "https://www.youtube.com/@channel",
+      "timestamp": "2024-01-01T12:00:00.000Z",
+      "executionTime": 2345
+    }
+  }
+} 
