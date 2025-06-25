@@ -1,156 +1,156 @@
-# 🤝 Guia de Contribuição - APIBR
+# 🤝 Contributing Guide - APIBR
 
-Obrigado pelo interesse em contribuir com a APIBR! Este projeto é uma API de scraping profissional que serve como alternativa gratuita ao Apify.
+Thank you for your interest in contributing to APIBR! This project is a professional web scraping API that serves as a free alternative to Apify.
 
-## 🚀 Como Começar
+## 🚀 Getting Started
 
-### 1. Clone o Repositório
+### 1. Clone the Repository
 ```bash
 git clone https://github.com/flaviofagundespro/APIBR.git
 cd APIBR
 ```
 
-### 2. Instale as Dependências
+### 2. Install Dependencies
 ```bash
 npm install
 ```
 
-### 3. Configure o Ambiente
+### 3. Configure Environment
 ```bash
 cp .env.example .env
-# Edite o .env com suas configurações locais
+# Edit .env with your local configurations
 ```
 
-### 4. Inicie o Redis (Obrigatório)
+### 4. Start Redis (Required)
 ```bash
 # Via Docker
 docker run -d -p 6379:6379 redis:7-alpine
 
-# Ou via Docker Compose
+# Or via Docker Compose
 docker-compose up redis -d
 ```
 
-### 5. Execute Localmente
+### 5. Run Locally
 ```bash
 npm start
 ```
 
-### 6. Teste a API
+### 6. Test the API
 ```bash
 curl -X POST http://localhost:3000/api/scrape \
   -H "Content-Type: application/json" \
   -d '{"url": "https://example.com", "strategy": "basic", "selector": "title"}'
 ```
 
-## 🐛 Reportar Bugs
+## 🐛 Reporting Bugs
 
-Use as [Issues do GitHub](https://github.com/flaviofagundespro/APIBR/issues) com as seguintes informações:
+Use [GitHub Issues](https://github.com/flaviofagundespro/APIBR/issues) with the following information:
 
-### Template para Bug Report:
+### Bug Report Template:
 ```
-**Descrição do Bug**
-Descrição clara e concisa do problema.
+**Bug Description**
+Clear and concise description of the problem.
 
-**Passos para Reproduzir**
-1. Vá para '...'
+**Steps to Reproduce**
+1. Go to '...'
 2. Execute '...'
-3. Veja o erro
+3. See error
 
-**Comportamento Esperado**
-O que deveria acontecer.
+**Expected Behavior**
+What should happen.
 
-**Comportamento Atual**
-O que está acontecendo.
+**Current Behavior**
+What is happening.
 
-**Ambiente**
+**Environment**
 - OS: [ex: Ubuntu 20.04]
 - Node.js: [ex: 18.17.0]
 - Redis: [ex: 7.0]
-- Versão da APIBR: [ex: 1.0.0]
+- APIBR Version: [ex: 1.0.0]
 
-**Logs de Erro**
+**Error Logs**
 ```
-Adicione logs relevantes aqui
+Add relevant logs here
 ```
 ```
 
-## 💡 Sugerir Melhorias
+## 💡 Suggesting Improvements
 
-Antes de implementar uma nova funcionalidade:
+Before implementing a new feature:
 
-1. **Abra uma Issue** explicando sua ideia
-2. **Discuta a proposta** com os mantenedores
-3. **Aguarde aprovação** antes de começar a implementar
-4. **Siga os padrões** de código existentes
+1. **Open an Issue** explaining your idea
+2. **Discuss the proposal** with maintainers
+3. **Wait for approval** before starting implementation
+4. **Follow existing** code patterns
 
-### Template para Feature Request:
+### Feature Request Template:
 ```
-**Funcionalidade Solicitada**
-Descrição clara da funcionalidade.
+**Requested Feature**
+Clear description of the feature.
 
-**Problema que Resolve**
-Que problema esta funcionalidade resolve?
+**Problem it Solves**
+What problem does this feature solve?
 
-**Solução Proposta**
-Como você imagina que isso deveria funcionar?
+**Proposed Solution**
+How do you imagine this should work?
 
-**Alternativas Consideradas**
-Outras abordagens que você considerou?
+**Alternatives Considered**
+Other approaches you considered?
 
-**Contexto Adicional**
-Screenshots, exemplos, etc.
+**Additional Context**
+Screenshots, examples, etc.
 ```
 
 ## 📝 Pull Requests
 
-### Processo:
-1. **Fork** o projeto
-2. **Crie uma branch** (`git checkout -b feature/nova-funcionalidade`)
-3. **Faça suas alterações** seguindo os padrões
-4. **Teste localmente** suas mudanças
-5. **Commit** suas mudanças (`git commit -m 'feat: adiciona nova funcionalidade'`)
-6. **Push** para a branch (`git push origin feature/nova-funcionalidade`)
-7. **Abra um Pull Request**
+### Process:
+1. **Fork** the project
+2. **Create a branch** (`git checkout -b feature/new-feature`)
+3. **Make your changes** following the patterns
+4. **Test locally** your changes
+5. **Commit** your changes (`git commit -m 'feat: add new feature'`)
+6. **Push** to the branch (`git push origin feature/new-feature`)
+7. **Open a Pull Request**
 
-### Padrões de Commit:
-- `feat:` Nova funcionalidade
-- `fix:` Correção de bug
-- `docs:` Mudanças na documentação
-- `style:` Formatação, sem mudança de código
-- `refactor:` Refatoração de código
-- `test:` Adição ou correção de testes
-- `chore:` Tarefas de manutenção
+### Commit Standards:
+- `feat:` New feature
+- `fix:` Bug fix
+- `docs:` Documentation changes
+- `style:` Formatting, no code change
+- `refactor:` Code refactoring
+- `test:` Adding or fixing tests
+- `chore:` Maintenance tasks
 
-### Checklist do PR:
-- [ ] Código testado localmente
-- [ ] Documentação atualizada (se necessário)
-- [ ] Testes passando
-- [ ] Segue padrões de código
-- [ ] Commit messages claras
-- [ ] PR tem descrição clara
+### PR Checklist:
+- [ ] Code tested locally
+- [ ] Documentation updated (if needed)
+- [ ] Tests passing
+- [ ] Follows code standards
+- [ ] Clear commit messages
+- [ ] PR has clear description
 
-## 📋 Padrões de Código
+## 📋 Code Standards
 
 ### JavaScript/Node.js:
-- Use **ES6+** features quando apropriado
-- **Async/await** ao invés de callbacks
-- **Nomes descritivos** para variáveis e funções
-- **Comentários** para lógica complexa
-- **Error handling** adequado
+- Use **ES6+** features when appropriate
+- **Async/await** instead of callbacks
+- **Descriptive names** for variables and functions
+- **Comments** for complex logic
+- **Proper error handling**
 
-### Estrutura de Arquivos:
+### File Structure:
 ```
 src/
-├── controllers/     # Lógica dos endpoints
-├── services/        # Lógica de negócio
-├── utils/          # Utilitários
-├── middleware/     # Middlewares Express
-└── config/         # Configurações
+├── controllers/     # Endpoint logic
+├── services/        # Business logic
+├── utils/          # Utilities
+├── middleware/     # Express middlewares
+└── config/         # Configurations
 ```
 
-### Exemplo de Código:
+### Code Example:
 ```javascript
-// ✅ Bom
+// ✅ Good
 async function scrapeWebsite(url, strategy) {
   try {
     const result = await scraperService.execute(url, strategy);
@@ -161,7 +161,7 @@ async function scrapeWebsite(url, strategy) {
   }
 }
 
-// ❌ Evitar
+// ❌ Avoid
 function scrape(u, s, cb) {
   scraperService.exec(u, s, function(err, res) {
     if (err) cb(err);
@@ -170,27 +170,27 @@ function scrape(u, s, cb) {
 }
 ```
 
-## 🧪 Testes
+## 🧪 Testing
 
-### Executar Testes:
+### Running Tests:
 ```bash
-# Todos os testes
+# All tests
 npm test
 
-# Testes específicos
+# Specific tests
 npm test -- --grep "scraping"
 
-# Com coverage
+# With coverage
 npm run test:coverage
 ```
 
-### Escrever Testes:
-- Use **Jest** para testes unitários
-- **Supertest** para testes de API
-- **Mocks** para dependências externas
-- **Testes de integração** quando necessário
+### Writing Tests:
+- Use **Jest** for unit tests
+- **Supertest** for API tests
+- **Mocks** for external dependencies
+- **Integration tests** when needed
 
-### Exemplo de Teste:
+### Test Example:
 ```javascript
 describe('Scraping Service', () => {
   test('should scrape basic content', async () => {
@@ -206,73 +206,73 @@ describe('Scraping Service', () => {
 });
 ```
 
-## 🛡️ Segurança
+## 🛡️ Security
 
-### Diretrizes:
-- **Nunca** commite credenciais ou chaves de API
-- **Valide** todas as entradas do usuário
-- **Sanitize** URLs e seletores
-- **Rate limiting** em endpoints públicos
-- **HTTPS** em produção
+### Guidelines:
+- **Never** commit credentials or API keys
+- **Validate** all user inputs
+- **Sanitize** URLs and selectors
+- **Rate limiting** on public endpoints
+- **HTTPS** in production
 
-### Reportar Vulnerabilidades:
-Para questões de segurança, envie email para: **[seu-email-seguranca]**
+### Reporting Vulnerabilities:
+For security issues, email: **[your-security-email]**
 
-## 📚 Documentação
+## 📚 Documentation
 
-### Atualizações Necessárias:
-- **README.md**: Para mudanças na API ou instalação
-- **API-DOCS.md**: Para novos endpoints ou parâmetros
-- **Comentários no código**: Para lógica complexa
-- **Exemplos**: Para novas funcionalidades
+### Required Updates:
+- **README.md**: For API or installation changes
+- **API-DOCS.md**: For new endpoints or parameters
+- **Code comments**: For complex logic
+- **Examples**: For new features
 
-## 🎯 Áreas que Precisam de Contribuição
+## 🎯 Areas Needing Contribution
 
-### 🔥 Alta Prioridade:
-- [ ] Testes automatizados
-- [ ] Documentação de APIs
-- [ ] Otimização de performance
-- [ ] Tratamento de erros
+### 🔥 High Priority:
+- [ ] Automated tests
+- [ ] API documentation
+- [ ] Performance optimization
+- [ ] Error handling
 
-### 🚀 Funcionalidades Desejadas:
-- [ ] Suporte a mais estratégias de scraping
-- [ ] Integração com mais ferramentas (Zapier, etc)
-- [ ] Dashboard de monitoramento
+### 🚀 Desired Features:
+- [ ] Support for more scraping strategies
+- [ ] Integration with more tools (Zapier, etc)
+- [ ] Monitoring dashboard
 - [ ] Webhook notifications
-- [ ] Suporte a proxy rotation
+- [ ] Proxy rotation support
 
-### 🐛 Bugs Conhecidos:
-- [ ] Timeout em sites muito lentos
-- [ ] Memory leaks em scraping intensivo
-- [ ] Rate limiting muito restritivo
+### 🐛 Known Bugs:
+- [ ] Timeout on very slow sites
+- [ ] Memory leaks in intensive scraping
+- [ ] Too restrictive rate limiting
 
-## 🏆 Reconhecimento
+## 🏆 Recognition
 
-Todos os contribuidores serão reconhecidos:
-- **README.md**: Lista de contribuidores
-- **CHANGELOG.md**: Créditos por versão
+All contributors will be recognized:
+- **README.md**: Contributors list
+- **CHANGELOG.md**: Credits per version
 - **GitHub**: Contributor badge
 
-## 📞 Suporte
+## 📞 Support
 
-### Canais de Comunicação:
-- **Issues**: Para bugs e features
-- **Discussions**: Para dúvidas gerais
-- **Email**: [seu-email] para questões privadas
+### Communication Channels:
+- **Issues**: For bugs and features
+- **Discussions**: For general questions
+- **Email**: [your-email] for private matters
 
-### Tempo de Resposta:
-- **Issues críticas**: 24-48h
-- **Pull Requests**: 2-5 dias
-- **Feature Requests**: 1-2 semanas
-
----
-
-## 🙏 Agradecimentos
-
-Obrigado por considerar contribuir com a APIBR! Cada contribuição, por menor que seja, faz diferença.
-
-**Juntos, vamos criar a melhor alternativa gratuita ao Apify!** 🚀
+### Response Time:
+- **Critical issues**: 24-48h
+- **Pull Requests**: 2-5 days
+- **Feature Requests**: 1-2 weeks
 
 ---
 
-**Dúvidas?** Abra uma [Issue](https://github.com/flaviofagundespro/APIBR/issues) ou entre em contato!
+## 🙏 Acknowledgments
+
+Thank you for considering contributing to APIBR! Every contribution, no matter how small, makes a difference.
+
+**Together, let's create the best free alternative to Apify!** 🚀
+
+---
+
+**Questions?** Open an [Issue](https://github.com/flaviofagundespro/APIBR/issues) or get in touch!

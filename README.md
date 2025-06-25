@@ -1,4 +1,4 @@
-# 🚀 APIBR - API de Scraping Profissional
+# 🚀 APIBR - Professional Web Scraping API
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
@@ -8,9 +8,9 @@
 [![GitHub stars](https://img.shields.io/github/stars/flaviofagundespro/APIBR.svg)](https://github.com/flaviofagundespro/APIBR/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/flaviofagundespro/APIBR.svg)](https://github.com/flaviofagundespro/APIBR/network)
 
-> **Alternativa gratuita e poderosa ao Apify para automações de scraping**
+> **A powerful, free alternative to Apify for web scraping automation**
 
-Uma API de scraping profissional construída com Node.js, Puppeteer e Redis. Oferece gerenciamento de pool de navegadores, múltiplas estratégias de scraping e monitoramento de nível empresarial.
+A professional web scraping API built with Node.js, Puppeteer, and Redis. Features browser pool management, multiple scraping strategies, and enterprise-level monitoring.
 
 ## 🚀 Features
 
@@ -46,8 +46,8 @@ Uma API de scraping profissional construída com Node.js, Puppeteer e Redis. Ofe
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/apibr.git
-cd apibr
+git clone https://github.com/flaviofagundespro/APIBR.git
+cd APIBR
 
 # Install dependencies
 npm install
@@ -63,8 +63,8 @@ npm start
 
 ```bash
 # Clone and start with Docker Compose
-git clone https://github.com/yourusername/apibr.git
-cd apibr
+git clone https://github.com/flaviofagundespro/APIBR.git
+cd APIBR
 docker-compose up -d
 ```
 
@@ -203,21 +203,13 @@ Interact with forms and extract data.
 {
   "strategy": "form",
   "url": "https://example.com",
-  "interactions": [
-    {
-      "type": "type",
-      "selector": "#search",
-      "value": "search term"
-    },
-    {
-      "type": "click",
-      "selector": "#submit"
-    }
-  ],
-  "finalSelectors": {
-    "results": {
-      "query": ".result",
-      "multiple": true
+  "formData": {
+    "username": "test@example.com",
+    "password": "password123"
+  },
+  "selectors": {
+    "result": {
+      "query": ".result-message"
     }
   }
 }
@@ -227,181 +219,112 @@ Interact with forms and extract data.
 
 ### Environment Variables
 
-Create a `.env` file:
+Create a `.env` file based on `.env.example`:
 
-```env
+```bash
 # Server Configuration
 PORT=3000
 NODE_ENV=development
 
 # Redis Configuration
 REDIS_URL=redis://localhost:6379
-CACHE_TTL=3600
 
 # Browser Pool Configuration
 BROWSER_POOL_SIZE=5
-BROWSER_HEADLESS=true
 BROWSER_TIMEOUT=30000
 
 # Rate Limiting
-RATE_LIMIT_WINDOW=900000
-RATE_LIMIT_MAX=100
+RATE_LIMIT_WINDOW=15
+RATE_LIMIT_MAX_REQUESTS=100
 
-# Authentication
-API_KEYS=key1,key2,key3
-
-# Logging
-LOG_LEVEL=info
-LOG_FORMAT=json
+# API Authentication (optional)
+API_KEY=your-secret-api-key
 ```
 
 ### Docker Configuration
 
-```yaml
-# docker-compose.yml
-version: '3.8'
-services:
-  apibr:
-    build: .
-    ports:
-      - "3000:3000"
-    environment:
-      - REDIS_URL=redis://redis:6379
-    depends_on:
-      - redis
-      - prometheus
-
-  redis:
-    image: redis:7-alpine
-    ports:
-      - "6379:6379"
-
-  prometheus:
-    image: prom/prometheus
-    ports:
-      - "9090:9090"
-    volumes:
-      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
-```
+The `docker-compose.yml` includes:
+- **APIBR**: Main application
+- **Redis**: Cache and job queue
+- **Prometheus**: Metrics collection
+- **Grafana**: Metrics visualization
 
 ## 🚀 Deployment
 
 ### Production Deployment
 
-1. **Environment Setup**
 ```bash
-# Set production environment
-export NODE_ENV=production
-export REDIS_URL=redis://your-redis-server:6379
-export API_KEYS=your-secure-api-key
-```
-
-2. **Docker Deployment**
-```bash
+# Build and start production services
 docker-compose -f docker-compose.prod.yml up -d
+
+# Or deploy to cloud platforms
+npm run deploy:heroku
+npm run deploy:aws
 ```
 
-3. **PM2 Deployment**
-```bash
-npm install -g pm2
-pm2 start ecosystem.config.js
-```
+### Environment-Specific Configurations
 
-### Monitoring
+- **Development**: Local Redis, debug logging
+- **Staging**: Cloud Redis, moderate logging
+- **Production**: High-availability Redis, minimal logging
 
-- **Health Check**: `GET /health`
-- **Metrics**: `GET /api/metrics`
-- **Pool Stats**: `GET /api/scrape/stats`
+## 📚 Examples
 
-## 📝 Examples
-
-### YouTube Scraping
-
-```bash
-curl -X POST http://localhost:3000/api/scrape \
-  -H "Content-Type: application/json" \
-  -d '{
-    "strategy": "javascript",
-    "url": "https://www.youtube.com/@channel",
-    "waitFor": {
-      "selector": "#content",
-      "timeout": 10000
-    },
-    "script": "{
-      channelName: document.querySelector(\"#channel-name\")?.textContent,
-      subscribers: document.querySelector(\"#subscriber-count\")?.textContent,
-      videos: Array.from(document.querySelectorAll(\"#video-title\")).slice(0, 10).map(v => ({
-        title: v.textContent,
-        url: v.href
-      }))
-    }"
-  }'
-```
-
-### E-commerce Product Scraping
+### E-commerce Scraping
 
 ```bash
 curl -X POST http://localhost:3000/api/scrape \
   -H "Content-Type: application/json" \
   -d '{
     "strategy": "basic",
-    "url": "https://example-store.com/product",
+    "url": "https://example-store.com/products",
     "selectors": {
-      "title": {
-        "query": ".product-title"
-      },
-      "price": {
-        "query": ".product-price"
-      },
-      "images": {
-        "query": ".product-image",
-        "attribute": "src",
-        "multiple": true
+      "products": {
+        "query": ".product-item",
+        "multiple": true,
+        "extract": {
+          "name": ".product-name",
+          "price": ".product-price",
+          "image": {
+            "query": "img",
+            "attribute": "src"
+          }
+        }
       }
     }
   }'
 ```
 
-### News Article Scraping
+### Social Media Monitoring
 
 ```bash
 curl -X POST http://localhost:3000/api/scrape \
   -H "Content-Type: application/json" \
   -d '{
     "strategy": "javascript",
-    "url": "https://news-site.com/article",
+    "url": "https://twitter.com/username",
     "script": "{
-      title: document.querySelector(\"h1\")?.textContent,
-      author: document.querySelector(\".author\")?.textContent,
-      content: document.querySelector(\".article-content\")?.textContent,
-      publishedDate: document.querySelector(\".date\")?.textContent
+      const tweets = Array.from(document.querySelectorAll(\".tweet\")).map(tweet => ({
+        text: tweet.querySelector(\".tweet-text\")?.textContent,
+        timestamp: tweet.querySelector(\".timestamp\")?.textContent,
+        likes: tweet.querySelector(\".like-count\")?.textContent
+      }));
+      return { tweets, count: tweets.length };
     }"
   }'
 ```
 
 ## 🤝 Contributing
 
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+### Quick Contribution Steps
+
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
-
-### Development Setup
-
-```bash
-# Install dependencies
-npm install
-
-# Run tests
-npm test
-
-# Run linting
-npm run lint
-
-# Start development server
-npm run dev
-```
 
 ## 📄 License
 
@@ -409,18 +332,18 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- [Puppeteer](https://pptr.dev/) - Browser automation
-- [Express](https://expressjs.com/) - Web framework
-- [Redis](https://redis.io/) - Caching and job queue
-- [Prometheus](https://prometheus.io/) - Monitoring
+- **Puppeteer**: For browser automation
+- **Express.js**: For the web framework
+- **Redis**: For caching and job queues
+- **Prometheus**: For metrics collection
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/apibr/issues)
-- **Documentation**: [Wiki](https://github.com/yourusername/apibr/wiki)
-- **Email**: your-email@example.com
+- **Issues**: [GitHub Issues](https://github.com/flaviofagundespro/APIBR/issues)
+- **Documentation**: [API Docs](http://localhost:3000/api/docs)
+- **Email**: [Your Email]
 
 ---
 
-**Made with ❤️ by [Your Name]**
+**Made with ❤️ for the open source community**
 
